@@ -9,6 +9,7 @@ import { DefaultLayout } from "./Layout/DefaultLayout";
 import { SignUpPage } from "./Pages/Signup";
 import { PatientDashboard } from "./Pages/Patient/Dashboard";
 import { PatientCard } from "./Pages/Patient/PatientCard";
+import { PatientManagePage } from "./Pages/Patient/Manage";
 
 const router = createBrowserRouter([
     {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
         ),
     },
     {
-        path: "/patient/dashboard",
+        path: "/patient",
         element: (
             <DefaultLayout>
                 <PatientDashboard />
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
         element: (
             <DefaultLayout>
                 <PatientCard />
+            </DefaultLayout>
+        ),
+    },
+    {
+        path: "/patient/manage",
+        element: (
+            <DefaultLayout>
+                <PatientManagePage />
             </DefaultLayout>
         ),
     },

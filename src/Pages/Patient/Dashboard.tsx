@@ -1,6 +1,9 @@
 import { Box, Grid, Heading } from "@chakra-ui/react";
 import { CustomCard } from "../../Components/BlogCard";
 import AppointmentCard from "../../Components/AptCard";
+import { PatientDetailsCard } from "../../Components/PatientDetailsCard";
+import { useGetPatientQuery } from "../../api/patient";
+import { useNavigate } from "react-router-dom";
 
 const cardColor: string[] = ["#ffdc73", "#b6e8de", "#b2e5ff", "#fe9dad", "#f5bace"];
 const blogs = [
@@ -27,6 +30,10 @@ const blogs = [
 ];
 
 export const PatientDashboard = () => {
+    const navigate = useNavigate(); 
+
+  
+    const { data: patientData } = useGetPatientQuery("patient@gmail.com");
     return (
         <Box>
             <Box>
@@ -55,8 +62,16 @@ export const PatientDashboard = () => {
                         }}
                         bgColor={cardColor[cardColor.length - 3]}
                     />
-                    
-                    
+                    <PatientDetailsCard
+                        {...{
+                            name: patientData?.patient.firstName + " " + patientData?.patient.lastName,
+                            gender: patientData?.gender,
+                            bloodGroup: patientData?.patient.details.bloodGroup,
+                        }}
+                        backgroundColor={cardColor[0]}
+                        buttonText={"Manage"}
+                        onButtonClick={() => { navigate("/patient/manage") }}
+                    />
                 </Grid>
             </Box>
             <Box mt={12}>
