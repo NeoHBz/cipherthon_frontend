@@ -7,6 +7,7 @@ import App from "./App";
 import { LoginPage } from "./Pages/Login";
 import { DefaultLayout } from "./Layout/DefaultLayout";
 import { SignUpPage } from "./Pages/Signup";
+import { PatientDashboard } from "./Pages/Patient/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
             </DefaultLayout>
         ),
     },
+    {
+        path: "/patient/dashboard",
+        element: (
+            <DefaultLayout>
+                <PatientDashboard />
+            </DefaultLayout>
+        ),
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
