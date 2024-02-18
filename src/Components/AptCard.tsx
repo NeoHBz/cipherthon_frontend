@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Text, Button } from '@chakra-ui/react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const AppointmentCard = ({ date, time, patientName, doctorName, isNext, bgColor }: any) => {
+const AppointmentCard = ({ date, time, hospitalName, doctorName, isNext, bgColor }: any) => {
   return (
     <Box
       p={4}
@@ -20,7 +20,7 @@ const AppointmentCard = ({ date, time, patientName, doctorName, isNext, bgColor 
         </Text>
       </Flex>
       <Heading fontSize="lg" mb={2}>
-        {patientName}
+        {hospitalName}
       </Heading>
       <Text fontSize="md" color="gray.600" mb={2}>
         Doctor: {doctorName}

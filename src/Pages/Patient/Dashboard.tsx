@@ -2,7 +2,7 @@ import { Box, Grid, Heading } from "@chakra-ui/react";
 import { CustomCard } from "../../Components/CustomCard";
 import AppointmentCard from "../../Components/AptCard";
 
-const cardColor: string[] = ["#ffbf00", "#b6e8de", "#67c7f7", "#f86a81", "#f5bace"];
+const cardColor: string[] = ["#ffdc73", "#b6e8de", "#b2e5ff", "#fe9dad", "#f5bace"];
 const blogs = [
     {
         title: "Unlocking the Power of Balanced Diets",
@@ -39,7 +39,7 @@ export const PatientDashboard = () => {
                         {...{
                             date: "2024-02-17",
                             time: "10:00 AM",
-                            patientName: "John Doe",
+                            hospitalName: "Medisure",
                             doctorName: "Dr. Smith",
                             isNext: false,
                         }}
@@ -49,21 +49,16 @@ export const PatientDashboard = () => {
                         {...{
                             date: "2024-02-17",
                             time: "10:00 AM",
-                            patientName: "John Doe",
+                            hospitalName: "Clinique Hospital",
                             doctorName: "Dr. Smith",
                             isNext: true,
                         }}
                         bgColor={cardColor[cardColor.length - 3]}
                     />
-                    {/* <Card>
-                        <Heading size="md">Upcoming</Heading>
-                    </Card>
-                    <Card>
-                        <Heading size="md">Patient</Heading>
-                    </Card> */}
+                    
                 </Grid>
             </Box>
-            <Box>
+            <Box mt={12}>
                 <Heading size="lg" mb="6">
                     Featured Blogs
                 </Heading>
