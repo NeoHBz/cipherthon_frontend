@@ -1,5 +1,5 @@
 import { Box, Grid, Heading } from "@chakra-ui/react";
-import { CustomCard } from "../../Components/CustomCard";
+import { CustomCard } from "../../Components/BlogCard";
 import AppointmentCard from "../../Components/AptCard";
 
 const cardColor: string[] = ["#ffdc73", "#b6e8de", "#b2e5ff", "#fe9dad", "#f5bace"];
