@@ -25,13 +25,13 @@ export const PatientDetailsCard = ({
                 </Text>
             </Flex>
             <Heading fontSize="xl" mb={2}>
-                {name}
+                {name ?? "First Last"}
             </Heading>
             <Text fontSize="md" color="gray.600" mb={2}>
-                <strong>Gender:</strong> {gender}
+                <strong>Gender:</strong> {gender ?? "Male"}
             </Text>
             <Text fontSize="md" color="gray.600" mb={2}>
-                <strong>Blood Group:</strong> {bloodGroup}
+                <strong>Blood Group:</strong> {bloodGroup ?? "A+"}
             </Text>
             <Button colorScheme="blue" size="sm" onClick={onButtonClick}>
                 {buttonText}

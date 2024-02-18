@@ -1,92 +1,123 @@
 import {
     Box,
     Button,
+    Checkbox,
     Flex,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
     Table,
     TableCaption,
     Tbody,
     Td,
+    Text,
     Th,
     Thead,
     Tr,
+    useDisclosure,
 } from "@chakra-ui/react";
 
 import { CiSquareCheck } from "react-icons/ci";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { IoClipboardOutline } from "react-icons/io5";
+import { IoBan } from "react-icons/io5";
 
-const tableData: {
+import { useState } from "react";
+
+const initialTableData: {
     hospitalName: string;
     accessing: string[];
     disease: string;
     status: string;
+    id: number;
 }[] = [
     {
+        id: 1,
         hospitalName: "Clinique Hospital",
         accessing: ["basic", "allergies", "sexual history"],
         disease: "Influenza",
         status: "pending",
     },
     {
+        id: 2,
         hospitalName: "General Hospital",
         accessing: ["basic", "lab results", "medications"],
         disease: "Pneumonia",
         status: "approved",
     },
     {
+        id: 3,
         hospitalName: "Unity Health Clinic",
         accessing: ["basic", "family history", "vaccination records"],
         disease: "Diabetes",
         status: "pending",
     },
     {
+        id: 4,
         hospitalName: "Metropolitan Hospital",
         accessing: ["basic", "lab results", "sexual history"],
         disease: "Hypertension",
         status: "approved",
     },
     {
+        id: 5,
         hospitalName: "Community Care Hospital",
         accessing: ["basic", "allergies", "immunization records"],
         disease: "Migraine",
         status: "pending",
     },
     {
+        id: 6,
         hospitalName: "Sunset Health Clinic",
         accessing: ["basic", "medications", "sexual history"],
         disease: "Asthma",
         status: "approved",
     },
     {
+        id: 7,
         hospitalName: "Ocean View Hospital",
         accessing: ["basic", "family history", "allergies"],
         disease: "Arthritis",
         status: "pending",
     },
     {
+        id: 8,
         hospitalName: "Rosewood Health Center",
         accessing: ["basic", "lab results", "sexual history"],
         disease: "Osteoporosis",
         status: "approved",
     },
     {
+        id: 9,
         hospitalName: "Pinecrest Hospital",
         accessing: ["basic", "allergies", "vaccination records"],
         disease: "Depression",
         status: "pending",
     },
     {
+        id: 10,
         hospitalName: "Westside Wellness Clinic",
         accessing: ["basic", "medications", "family history"],
         disease: "Cancer",
         status: "approved",
     },
 ];
-
+const allAccessing = initialTableData
+    .map((data) => data.accessing)
+    .flat()
+    .filter((value, index, self) => self.indexOf(value) === index);
 export const PatientManagePage = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [currentId, setCurrentId] = useState(0);
+    const [currentChecked, setCurrentChecked] = useState<string[]>([]);
+    const [tableData, setTableData] = useState(initialTableData);
     return (
         <Box>
-            <Flex maxH={"50vh"} w={"w-screen"}>
+            <Flex w={"w-screen"}>
                 <Box
                     w={"80vw"}
                     overflow="auto"
@@ -95,13 +126,13 @@ export const PatientManagePage = () => {
                     borderRadius={"2vh"}
                 >
                     <Table variant="simple">
-                        <TableCaption>Approve or Mange existing connections</TableCaption>
+                        <TableCaption>Approve or Mange existing connections with HealthCare providers</TableCaption>
                         <Thead>
                             <Tr>
-                                <Th>Hospital Name</Th>
+                                <Th>HealthCare Provider</Th>
                                 <Th>Disease</Th>
                                 <Th>Accessing</Th>
-                                <Th>Status</Th>
+                                <Th>Current Status</Th>
                                 <Th isNumeric>Action</Th>
                             </Tr>
                         </Thead>
@@ -111,19 +142,52 @@ export const PatientManagePage = () => {
                                     <Tr key={index}>
                                         <Td>{row.hospitalName}</Td>
                                         <Td>{row.disease}</Td>
-                                        <Td>{row.accessing.join(", ")}</Td>
-                                        <Td>{row.status.toLocaleUpperCase()}</Td>
+                                        <Td>{row.accessing.join(", ").length > 0 ? row.accessing.join(", ") : "N/A"}</Td>
+                                        <Td>
+                                            <Text color={row.status === "approved" ? "green" : "orange"}>
+                                                {row.status.slice(0, 1).toUpperCase() + row.status.slice(1)}
+                                            </Text>
+                                        </Td>
                                         <Td>
                                             {row.status === "approved" ? (
-                                                <Button variant={"ghost"}>
+                                                <Box>
+
+                                                <Button
+                                                    variant={"ghost"}
+                                                    onClick={() => {
+                                                        setCurrentChecked(row.accessing);
+                                                        setCurrentId(row.id);
+                                                        onOpen();
+                                                    }}
+                                                >
                                                     <IoClipboardOutline color="blue" />
-                                                </Button>
+                                                    </Button>
+                                                    <Button variant={"ghost"} onClick={() => {
+                                                        // remove the row from the table
+                                                        setTableData((prev) => prev.filter((value) => value.id !== row.id));
+                                                    }}>
+                                                        <IoBan color="red" />
+                                                    </Button>
+                                                </Box>
+                                                
                                             ) : (
                                                 <Box>
-                                                    <Button variant={"ghost"}>
+                                                    <Button
+                                                        variant={"ghost"}
+                                                        onClick={() => {
+                                                            setCurrentChecked(
+                                                                row.accessing,
+                                                            );
+                                                            setCurrentId(row.id);
+                                                            onOpen();
+                                                        }}
+                                                    >
                                                         <CiSquareCheck color="green" />
                                                     </Button>
-                                                    <Button variant={"ghost"}>
+                                                        <Button variant={"ghost"} onClick={() => {
+                                                            // remove the row from the table
+                                                            setTableData((prev) => prev.filter((value) => value.id !== row.id));
+                                                        }}>
                                                         <RiDeleteBin7Line color="red" />
                                                     </Button>
                                                 </Box>
@@ -141,6 +205,62 @@ export const PatientManagePage = () => {
                             </Tr>
                         </Tfoot> */}
                     </Table>
+                    <Modal isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader>Manage</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                {allAccessing.map((access, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <Checkbox
+                                                isChecked={currentChecked.includes(access)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setCurrentChecked((prev) => [
+                                                            ...prev,
+                                                            access,
+                                                        ]);
+                                                    } else {
+                                                        setCurrentChecked((prev) =>
+                                                            prev.filter(
+                                                                (value) => value !== access,
+                                                            ),
+                                                        );
+                                                    }
+                                                }}
+                                            >
+                                                {access}
+                                            </Checkbox>
+                                        </div>
+                                    );
+                                })}
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <Button colorScheme="blue" mr={3} onClick={() => {
+                                    setTableData((prev) => {
+                                        return prev.map((data) => {
+                                            if (data.id === currentId) {
+                                                return {
+                                                    ...data,
+                                                    accessing: currentChecked,
+                                                    status: "approved",
+                                                };
+                                            }
+                                            return data;
+                                        });
+                                    });
+                                    setCurrentChecked([]);
+                                    setCurrentId(0);
+                                    onClose();
+                                }}>
+                                    Save
+                                </Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
                 </Box>
             </Flex>
         </Box>

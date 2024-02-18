@@ -123,7 +123,7 @@ export const SignUpPage = () => {
                         <Box justifyContent={"left"} mt={"12"}>
                                         <Text>
                                             Already have an account? {" "}
-                                            <Link color={"blue"} href="/login">
+                                            <Link color={"blue"} href="/">
                                                 Login
                                             </Link>
                                         </Text>

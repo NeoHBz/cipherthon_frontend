@@ -30,7 +30,7 @@ export const CustomCard = ({ imageUrl, altText, title, description, price, butto
                     </Text>}
                 </Stack>
             </CardBody>
-            <CardFooter>
+            <CardFooter display={"flex"} justifyContent={"center"}>
                 <ButtonGroup spacing="2">
                     <Button variant="solid" colorScheme="blue" onClick={() => { null; }}>
                         {buttonText}

@@ -33,7 +33,7 @@ const AppointmentCard = ({
             <Text fontSize="md" color="gray.600" mb={2}>
                 Doctor: {doctorName}
             </Text>
-            <Button colorScheme="blue" size="sm">
+            <Button colorScheme="blue" size="sm" mt={2}>
                 View {isNext ? "Report" : "Details"}
             </Button>
         </Box>
