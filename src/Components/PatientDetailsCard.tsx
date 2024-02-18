@@ -1,4 +1,5 @@
 import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react";
+import { initialTableData } from "../Pages/Patient/patientData";
 
 export const PatientDetailsCard = ({
     name,
@@ -24,16 +25,19 @@ export const PatientDetailsCard = ({
                     Your Patient Card
                 </Text>
             </Flex>
-            <Heading fontSize="xl" mb={2}>
+            <Heading fontSize="xl" mt={2}>
                 {name ?? "First Last"}
             </Heading>
+            <Box display="flex" flexDirection="row" justifyContent="space-between" mt={4}>
+
             <Text fontSize="md" color="gray.600" mb={2}>
-                <strong>Gender:</strong> {gender ?? "Male"}
+                <strong>Approved:</strong> {initialTableData.filter((data) => data.status === "approved").length}
             </Text>
             <Text fontSize="md" color="gray.600" mb={2}>
-                <strong>Blood Group:</strong> {bloodGroup ?? "A+"}
+                <strong>Pending:</strong> {initialTableData.filter((data) => data.status === "pending").length}
             </Text>
-            <Button colorScheme="blue" size="sm" onClick={onButtonClick}>
+            </Box>
+            <Button colorScheme="blue" size="sm" onClick={onButtonClick} mt={2}>
                 {buttonText}
             </Button>
         </Box>
