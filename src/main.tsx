@@ -8,6 +8,7 @@ import { LoginPage } from "./Pages/Login";
 import { DefaultLayout } from "./Layout/DefaultLayout";
 import { SignUpPage } from "./Pages/Signup";
 import { PatientDashboard } from "./Pages/Patient/Dashboard";
+import { PatientCard } from "./Pages/Patient/PatientCard";
 
 const router = createBrowserRouter([
     {
@@ -41,7 +42,15 @@ const router = createBrowserRouter([
                 <PatientDashboard />
             </DefaultLayout>
         ),
-    }
+    },
+    {
+        path: "/patient/card",
+        element: (
+            <DefaultLayout>
+                <PatientCard />
+            </DefaultLayout>
+        ),
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
