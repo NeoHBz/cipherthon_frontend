@@ -20,7 +20,7 @@ export const LoginPage = () => {
         <div>
             <Grid mt={"10%"} templateColumns={"repeat(2,1fr)"}>
                 <GridItem
-                    bgColor={"whitesmoke"}
+                    bgColor={"#f5f5f5"}
                     borderTopLeftRadius={30}
                     style={{ borderRight: "2px solid white" }}
                     borderBottomLeftRadius={30}
@@ -33,7 +33,7 @@ export const LoginPage = () => {
                         <Text fontWeight={60}>
                             A Hospital
                             <Text fontWeight={"bold"}>Bed Is A Parked Taxi</Text>
-                            <Text>With A Meter Runnig</Text>
+                            <Text>With A Meter Running</Text>
                         </Text>
                     </Box>
                 </GridItem>
@@ -46,7 +46,6 @@ export const LoginPage = () => {
                     alignItems="left"
                     textAlign={"left"}
                     justifyContent="left"
-                    bgColor={"whitesmoke"}
                     filter="opacity(50)"
                 >
                     <Flex>
@@ -60,7 +59,7 @@ export const LoginPage = () => {
                             <HStack>
                                 <div>
                                     <HospitalSVG
-                                        style={{ transform: "scale(0.5)" }}
+                                        style={{ transform: "scale(0.4)" }}
                                         width="128"
                                         height="128"
                                     />
@@ -71,9 +70,10 @@ export const LoginPage = () => {
                                         Health{" "}
                                     </Text>
                                     <Box
-                                        fontSize={"25"}
+                                        fontSize={"20"}
                                         bgColor={"navy"}
                                         p={2}
+                                        ml={-2}
                                         borderRadius={5}
                                         color={"white"}
                                         fontWeight={"Bold"}
@@ -114,7 +114,7 @@ export const LoginPage = () => {
                                     <Box justifyContent={"left"} mt={"12"}>
                                         <Text>
                                             Not a user Sign In ?{" "}
-                                            <Link color={"blue"} href="/signup">
+                                            <Link color={"blue"} href="/register">
                                                 Register
                                             </Link>
                                         </Text>
